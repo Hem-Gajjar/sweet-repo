@@ -1,4 +1,4 @@
-make this better:
+
 # Sweet Shop Management System
 
 A simple full-stack application for managing sweets inventory, built with the MERN stack (MongoDB, Express, React, Node.js) using **Test-Driven Development (TDD)**.
