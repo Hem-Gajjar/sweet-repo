@@ -33,7 +33,7 @@ exports.purchaseSweet = async(req, res) => {
             return res.status(400).json({ message: "Insufficient stock" });
         }
 
-        sweet.quantity = quantity; // ✅ subtract properly
+        sweet.quantity = quantity;
         await sweet.save();
 
         res.json(sweet);
