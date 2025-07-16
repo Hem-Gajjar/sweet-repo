@@ -75,21 +75,7 @@ PUT /api/sweets/restock/:id
 pgsql
 Copy
 Edit
-sweet_shop_management/
-├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── tests/
-│   ├── server.js
-│   └── .env
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   └── App.js
-│   └── package.json
-└── README.md
+<img width="269" height="378" alt="image" src="https://github.com/user-attachments/assets/7242d193-dd11-4acc-af60-b9a2ef5dddbe" />
 
 ### 📜 API Endpoints
 Base URL: http://localhost:5000/api/sweets
