@@ -28,35 +28,26 @@ A simple full-stack application for managing sweets inventory, built with the ME
 git clone https://github.com/Hem-Gajjar/sweet_shop_management.git
 cd sweet_shop_management
 ### 2️⃣ Set Up Backend
-bash
-Copy
-Edit
+
 cd backend
 npm install
-Create a .env file in backend directory:
 
-ini
-Copy
-Edit
+Create a .env file in backend directory:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-bash
-Copy
-Edit
+
+Start Project
 npm start
+
 ### 3️⃣ Set Up Frontend
-bash
-Copy
-Edit
+
 cd ../frontend
 npm install
 npm start
 App runs at: http://localhost:3000
 
 ### 🧪 Testing (Backend Only)
-bash
-Copy
-Edit
+
 cd backend
 npm test
 Uses Jest and Supertest to validate API behavior such as:
@@ -72,12 +63,11 @@ PUT /api/sweets/purchase/:id
 PUT /api/sweets/restock/:id
 
 ### 📁 Folder Structure
-pgsql
-Copy
-Edit
+
 <img width="269" height="378" alt="image" src="https://github.com/user-attachments/assets/7242d193-dd11-4acc-af60-b9a2ef5dddbe" />
 
 ### 📜 API Endpoints
+
 Base URL: http://localhost:5000/api/sweets
 Method	Endpoint	Description
 
