@@ -73,15 +73,55 @@ const AddSweetForm = () => {
     setFilteredSweets(result);
   };
 
+   // 🛒 Purchase Feature
+  const handlePurchase = async (sweet) => {
+    const qty = parseInt(prompt(`Enter quantity to purchase (Available: ${sweet.quantity})`));
+    if (!qty || qty <= 0) return alert("Invalid quantity!");
+    if (qty > sweet.quantity) return alert("Not enough stock!");
+
+    const updatedQty = sweet.quantity - qty;
+    
+    try {
+      await axios.put(`http://localhost:5000/api/sweets/purchase/${sweet._id}`, {
+        ...sweet,
+        quantity: updatedQty,
+      });
+      console.log(updatedQty)
+      fetchSweets();
+      alert("Purchase successful!");
+    } catch (err) {
+      alert(err);
+    }
+  };
+   // Restock
+  const handleRestock = async (sweet) => {
+    const qty = parseInt(prompt(`Enter quantity to restock:`));
+    if (!qty || qty <= 0) return alert("Invalid quantity!");
+
+    try {
+      await axios.put(`http://localhost:5000/api/sweets/restock/${sweet._id}`, {
+        quantity: qty,
+      });
+      fetchSweets();
+      alert("Restock successful!");
+    } catch (err) {
+      alert("Restock failed.");
+      console.error(err);
+    }
+  };
   useEffect(() => {
     fetchSweets();
   }, []);
 
   return (
     <div className="min-vh-50 align-items-center justify-content-center">
+      
       {/* Add Sweet Form */}
-      <div className="card shadow-lg p-4 mb-3 m-auto" style={{ maxWidth: "500px", width: "100%" }}>
-        <h2 className="text-center mb-4">Add New Sweet</h2>
+      <div
+        className="card shadow-lg p-4 mb-3 m-auto"
+        style={{ maxWidth: "500px", width: "100%" }}
+      >
+        <h2 className="text-center mb-4"> Add New Sweet </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label fw-semibold">
@@ -114,7 +154,7 @@ const AddSweetForm = () => {
           <div className="mb-3">
             <label className="form-label fw-semibold">
               <i className="bi bi-currency-rupee me-2 text-warning" />
-              Price (₹)
+              Price(₹)
             </label>
             <input
               name="price"
@@ -142,18 +182,19 @@ const AddSweetForm = () => {
             />
           </div>
           <div className="text-center">
-            <button type="submit" className="btn btn-lg btn-warning px-5 rounded-pill shadow">
+            <button
+              type="submit"
+              className="btn btn-lg btn-warning px-5 rounded-pill shadow"
+            >
               <i className="bi bi-plus-circle me-2" />
               Add Sweet
             </button>
           </div>
         </form>
       </div>
-
       {/* Sweet List with Filters */}
       <div className="container mt-4">
-        <h2 className="mb-4 text-center">Available Sweets</h2>
-
+        <h2 className="mb-4 text-center"> Available Sweets </h2>
         {/* Filters */}
         <div className="card p-3 mb-3 bg-light shadow-sm">
           <div className="row g-2">
@@ -199,36 +240,42 @@ const AddSweetForm = () => {
             </div>
           </div>
         </div>
-
         {/* Table */}
         <table className="table table-striped table-hover table-bordered text-center rounded-10">
           <thead className="table-dark">
             <tr>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price (₹)</th>
-              <th>Quantity</th>
-              <th>Action</th>
+              <th> Name </th> <th> Category </th> <th> Price(₹) </th>
+              <th> Quantity </th> <th> Action </th>
             </tr>
           </thead>
           <tbody>
+            
             {filteredSweets.map((sweet) => (
               <tr key={sweet._id}>
-                <td>{sweet.name}</td>
-                <td>{sweet.category}</td>
-                <td>{sweet.price}</td>
-                <td>{sweet.quantity}</td>
+                <td> {sweet.name} </td> <td> {sweet.category} </td>
+                <td> {sweet.price} </td> <td> {sweet.quantity} </td>
                 <td>
                   <button
-                    className="btn btn-danger btn-sm"
+                    className="btn btn-danger btn-sm m-1"
                     onClick={() => deleteSweet(sweet._id)}
                   >
                     Delete
                   </button>
+                  <button
+                    className="btn btn-success btn-sm m-1"
+                    onClick={() => handlePurchase(sweet)}
+                  >
+                    Purchase
+                  </button>
+                  <button
+                      className="btn btn-primary btn-sm m-1"
+                      onClick={() => handleRestock(sweet)}
+                    >
+                      Restock
+                  </button>
                 </td>
               </tr>
             ))}
-
             {filteredSweets.length === 0 && (
               <tr>
                 <td colSpan="5" className="text-center text-muted">
