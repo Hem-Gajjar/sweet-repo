@@ -80,8 +80,13 @@ Edit
 ### 📜 API Endpoints
 Base URL: http://localhost:5000/api/sweets
 Method	Endpoint	Description
+
 GET	/	Get all sweets
+
 POST	/	Add a new sweet
+
 DELETE	/:id	Delete a sweet
+
 PUT	/purchase/:id	Purchase (reduce stock)
+
 PUT	/restock/:id	Restock (increase stock)
